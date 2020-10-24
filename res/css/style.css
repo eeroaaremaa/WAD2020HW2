@@ -219,22 +219,33 @@ nav div.avatar-container {
     min-width: 200px;
     height: auto;
     z-index: 1;
+    margin-top: -20px;
+
+
 }
 
 .dropdown-content p {
     color: black;
-    padding: 10px 10px;
     display: block;
     text-align: left;
+    padding: 0px 0px 0px 10px;
+    margin-top: -5px;
+    margin-left: -10px;
+    
 }
 
 .dropdown-content a {
     color: #0277bd;
-    padding: 10px 10px;
     display: block;
     text-align: left;
+    margin: 0 -10px;
+    padding: 10px 0px 10px 10px;
+    border-top: 1px solid;
+    border-color: #8a8a8a transparent transparent transparent;
 }
 
-.dropdown:hover .dropdown-content{ 
+
+.avatar-container:active .dropdown-content{
     display: block;
 }
+
