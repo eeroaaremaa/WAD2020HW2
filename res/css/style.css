@@ -263,9 +263,11 @@ nav div.avatar-container {
     clear: both;
   }
  .photo {
+    width:80px;
+    height:80px;
+    object-fit: cover;
     border-radius: 50%;
     padding: 5px;
-    width: 30%;
     display: block;
     margin-left: auto;
     margin-right: auto;
