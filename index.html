@@ -9,96 +9,103 @@
     <script type = "text/javascript" language = "javascript">
       $(document).ready(function() {
         $.getJSON('https://private-anon-d9fc43b9c8-wad20postit.apiary-mock.com/users/1', function(jd) {
-          $('#dropdown-content').html('<p>' + jd.firstname + ' ' + jd.lastname + '</p>');
-          $('#dropdown-content').append('<p>' + jd.email + '</p>');    
-          $('#dropdown-content').append('<a href="browse.html">Browse</a> <a href="">Log Out</a>');
-          $('#avatar').html('<img src="' + jd.avatar +'" '+'class="avatar" alt="Me">');
+            $('#dropdown-content').html('<p>' + jd.firstname + ' ' + jd.lastname + '</p>');
+            $('#dropdown-content').append('<p>' + jd.email + '</p>');
+            $('#dropdown-content').append('<a href="browse.html">Browse</a> <a href="login.html">Log Out</a>');
+            $('#avatar').html('<img src="' + jd.avatar +'" '+'class="avatar" alt="Me">');
+            $('#avatar').click(function(){
+                if($('.dropdown-content').is(":visible")){
+                    $('.dropdown-content').hide();
+                }
+                else{
+                    $('.dropdown-content').show();
+                }
+            })
+        });
+          $.getJSON('https://private-anon-970a155e45-wad20postit.apiary-mock.com/posts', function(jd) {
+          for (let i = 0; i < jd.length; i++) {
+            avatarURL = jd[i].author.avatar
+            authorName = jd[i].author.firstname +" "+jd[i].author.lastname
+            createtime = jd[i].createTime
+            text = ""
+            mediaURL = ""
+            if (jd[i].text != null)text = jd[i].text
+            if (jd[i].media != null){
+              mediaURL = jd[i].media.url
+              if (jd[i].media.type == "video"){
+                media = '<video controls><source src="'+mediaURL+'">'
+              }
+              else {
+                media = '<img src="'+mediaURL+'" alt="">'
+              }
+              post = '<div class="post">' +
+                      '<div class="post-author">' +
+                      '<span class="post-author-info">' +
+                      '<img src="' + avatarURL + '" alt="Post author">' +
+                      '<small>' + authorName + '</small>' +
+                      '</span>' +
+                      '<small>' + createtime + '</small>' +
+                      '</div>' +
+                      '<div class="post-image">' +
+                      media +
+                      '</div>' +
+                      '<div class="post-title">' +
+                      '<h3>' + text + '</h3>' +
+                      '</div>' +
+                      '<div class="post-actions">' +
+                      '<button type="button" name="like" class="like-button">'+jd[i].likes+'</button>' +
+                      '</div>' +
+                      '</div>'
+            }
+            else { post = '<div class="post">' +
+                    '<div class="post-author">' +
+                    '<span class="post-author-info">' +
+                    '<img src="' + avatarURL + '" alt="Post author">' +
+                    '<small>' + authorName + '</small>' +
+                    '</span>' +
+                    '<small>' + createtime + '</small>' +
+                    '</div>' +
+                    '<div class="post-title">' +
+                    '<h3>' + text + '</h3>' +
+                    '</div>' +
+                    '<div class="post-actions">' +
+                    '<button type="button" name="like" class="like-button">'+jd[i].likes+'</button>' +
+                    '</div>' +
+                    '</div>'}
+
+
+
+
+            $(".main-container").append(post)
+          }
+          $('.like-button').click("click", function () {
+            $(this).toggleClass("liked");
+          })
         });
       });
     </script>
   </head>
   <body>
     <header>
-      <nav>
-        <div class="logo-container">
-          <img src="res/images/logo.png" alt="postIt">
-        </div>
-        <div class="search-container">
-          <input type="text" name="search"><button type="button">Search</button>
-        </div>
-        <div class="avatar-container">
-          <div class="avatar" id="avatar">
-            <img src="res/images/avatar.png" class="avatar" alt="Me">
-          </div>
-          <div class="dropdown" sytle="float:right">
-            <div class="dropdown-content" id="dropdown-content">
-              <p>test1</p>
-              <a href="browse.html">Browse</a>
-              <a href="">Log Out</a>
+        <nav>
+            <div class="logo-container">
+                <img src="res/images/logo.png" alt="postIt">
             </div>
-          </div>
-          <!--<div class="dropdown">
-            <select>
-              <option value="test1">testtest</option>
-            </select>
-          </div>-->
-        </div>
-      </nav>
+            <div class="search-container">
+                <input type="text" name="search"><button type="button">Search</button>
+            </div>
+            <div class="avatar-container">
+                <div class="avatar" id="avatar" style="padding: 0">
+                    <img src="res/images/avatar.png" class="avatar" alt="Me">
+                </div>
+                <div class="dropdown" sytle="float:right">
+                    <div class="dropdown-content" id="dropdown-content">
+                    </div>
+                </div>
+            </div>
+        </nav>
     </header>
     <section class="main-container">
-      <div class="post">
-        <div class="post-author">
-          <span class="post-author-info">
-            <img src="res/images/avatar.png" alt="Post author">
-            <small>John Doe</small>
-          </span>
-          <small>Sep 18, 2020 15:16</small>
-        </div>
-        <div class="post-image">
-          <img src="res/images/posts/1.jpg" alt="">
-        </div>
-        <div class="post-title">
-          <h3>I think it's going to rain</h3>
-        </div>
-        <div class="post-actions">
-          <button type="button" name="like" class="like-button">100k</button>
-        </div>
-      </div>
-
-      <div class="post">
-        <div class="post-author">
-          <span class="post-author-info">
-            <img src="res/images/avatar.png" alt="Post author">
-            <small>John Doe</small>
-          </span>
-          <small>Sep 18, 2020 15:16</small>
-        </div>
-        <div class="post-title">
-          <h3>Which weighs more, a pound of feathers or a pound of bricks?</h3>
-        </div>
-        <div class="post-actions">
-          <button type="button" name="like" class="like-button">15k</button>
-        </div>
-      </div>
-
-      <div class="post">
-        <div class="post-author">
-          <span class="post-author-info">
-            <img src="res/images/avatar.png" alt="Post author">
-            <small>John Doe</small>
-          </span>
-          <small>Sep 18, 2020 17:18</small>
-        </div>
-        <div class="post-image">
-          <img src="res/images/posts/2.jpg" alt="">
-        </div>
-        <div class="post-title">
-          <h3>Felt cute, might delete later</h3>
-        </div>
-        <div class="post-actions">
-          <button type="button" name="like" class="like-button liked">10k</button>
-        </div>
-      </div>
     </section>
   </body>
 </html>
