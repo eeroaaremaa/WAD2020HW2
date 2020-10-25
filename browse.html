@@ -29,15 +29,29 @@
             post = '<div class="column">' +
                     '<img class="photo" src='+avatarURL+' alt="Me">'+
                     '<p>'+authorName+'</p>'+
-                '<button type="button" class="follow-button">Follow</button>'+
+                '<button value="Follow" type="button" class="follow-button">Follow</button>'+
             '</div>'
             $(".row").append(post)
                  }
-            });
-        $('.follow-button').click("click", function () {
-            $(this).toggleClass("followed");
-          })    
+            $('.follow-button').click("click", function () {
+                $(this).toggleClass("followed");
+                var self = this;
+                change(self);
+          })
+            });    
         });
+        function change(btn) {
+
+            if (btn.value == "Follow") {
+            btn.value = "Followed";
+            btn.innerHTML = "Followed";
+            }
+            else {
+                btn.value = "Follow";
+                btn.innerHTML = "Follow";
+}
+
+}
     </script>
   </head>
   <body>
