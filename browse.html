@@ -27,44 +27,42 @@
             avatarURL = jd[i].avatar
             authorName = jd[i].firstname +" "+jd[i].lastname
             post = '<div class="column">' +
-                    '<img src='+avatarURL+'class="photo" alt="Me">'+
+                    '<img class="photo" src='+avatarURL+' alt="Me">'+
                     '<p>'+authorName+'</p>'+
-                '<button type="button" class="follow">Follow</button>'+
+                '<button type="button" class="follow-button">Follow</button>'+
             '</div>'
             $(".row").append(post)
                  }
             });
+        $('.follow-button').click("click", function () {
+            $(this).toggleClass("followed");
+          })    
         });
     </script>
   </head>
   <body>
     <header>
-      <nav>
-        <div class="logo-container">
-          <img src="res/images/logo.png" alt="postIt">
-        </div>
-        <div class="search-container">
-          <input type="text" name="search"><button type="button">Search</button>
-        </div>
-        <div class="avatar-container">
-          <div class="dropdown" style="float:right">
-            <div class="avatar" id="avatar">
-              <img src="" class="avatar" alt="Me">
+        <nav>
+            <div class="logo-container">
+                <img src="res/images/logo.png" alt="postIt">
             </div>
-            <div class="dropdown-content" id="dropdown-content">
-              <p>test1</p>
-              <a href="browse.html">Browse</a>
-              <a href="">Log Out</a>
+            <div class="search-container">
+                <input type="text" name="search"><button type="button">Search</button>
             </div>
-          </div>
-        </div>
-      </nav>
+            <div class="avatar-container">
+                <div class="avatar" id="avatar" style="padding: 0">
+                    <img src="res/images/avatar.png" class="avatar" alt="Me">
+                </div>
+                <div class="dropdown" sytle="float:right">
+                    <div class="dropdown-content" id="dropdown-content">
+                    </div>
+                </div>
+            </div>
+        </nav>
     </header>
     <section class="main-container">
         <div class="row">
           </div>
-        <div class="row">
-        </div>
     </section>
   </body>
 </html>
